@@ -1,9 +1,11 @@
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import datetime, timedelta
 from jose import jwt, JWTError
 from passlib.context import CryptContext
+
 
 SECRET_KEY = "ee23a410114da24d375f607844caccb0ef527581471eaaf54326506e4d250842"
 ALGORITHM = "HS256"
@@ -15,6 +17,13 @@ db = {
         "full_name": "Tim Cook",
         "email": "tim.cook@icloud.com",
         "hashed_password": "$2b$12$R2bmBFL8bFhOK7tPdCukuuSW0gMLqHTZugNL5/v/gwk3kfqEDBisi",
+        "disabled": False
+    },
+    "kris": {
+        "username": "kris",
+        "full_name": "Kris Khuslen",
+        "email": "khuslen@akumosolutions.io",
+        "hashed_password": "$2b$12$atSQAy6iGKe4DRsaFQEHmOo6i4IVaUGWjoNPqlkH0Ptrhyn1ep3nW",
         "disabled": False
     }
 }
@@ -119,5 +128,13 @@ async def read_users_me(current_user: User = Depends(get_current_active_user)):
 async def read_own_items(current_user: User = Depends(get_current_active_user)):
     return [{"item_id": 1, "ownder": current_user}]
 
-# pwd = get_password_hash("admin12345")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # allow your Next.js URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# pwd = get_password_hash("redhat12345")
 # print("pass", pwd)
