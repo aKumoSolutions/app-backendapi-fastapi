@@ -9,24 +9,32 @@ A simple user authentication system built with **FastAPI**, featuring:
 
 ## 🚀 Getting Started
 
-### Prerequisites
+## Running the Application
 
-Make sure you have:
+## Backend on AWS EC2 (Amazon Linux 2023)
 
-- Python 3.8+
-- `pip` installed
+1. **Prepare the Environment**  
+   Ensure you have an EC2 instance running Amazon Linux 2023 with SSH access.
 
-### Install Dependencies
+2. **Run the Setup Script**  
+   The repository contains a `setup.sh` script to help you install python 3.11 and pip 3.11 Run the script with the following command:
 
-```bash
-pip install fastapi uvicorn python-jose passlib[bcrypt]
-```
+   ```bash
+   bash scripts/setup.sh
 
-### Run the App
+3. **Install Project Dependencies**
+   After running the setup script, install the necessary dependencies:
 
-```bash
-uvicorn main:app --reload
-```
+   ```bash
+   pip-3.11 install -r requirements.txt
+
+4. **Start the Production Server**
+   Once the build is complete, you can start the production server:
+   
+   ```bash
+   uvicorn main:app --host 0.0.0.0 --port 8000 --reload 
+
+
 
 Visit: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) to test the API using the Swagger UI.
 
