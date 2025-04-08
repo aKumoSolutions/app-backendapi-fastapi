@@ -130,7 +130,7 @@ async def read_own_items(current_user: User = Depends(get_current_active_user)):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # allow your Next.js URL
+    allow_origins=["*"],  # allow your Next.js URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
