@@ -1,3 +1,92 @@
-**venv**
-venv/*
+# Python Bytecode Files
+__pycache__/
+*.py[cod]
+*.pyo
 
+# Virtual Environments
+venv/
+env/
+*.env
+.env/
+
+# FastAPI-specific files
+*.db
+*.sqlite
+
+# IDEs
+.vscode/
+.idea/
+
+# FastAPI migration folder
+alembic/
+
+# Dependency directories
+pip-wheel-metadata/
+.eggs/
+*.egg-info/
+dist/
+build/
+
+# .env for local environment variables (if you're using it)
+*.env
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Pytest Cache
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# VSCode settings
+.vscode/
+
+# Sphinx documentation
+docs/_build/
+build/
+
+# PyCharm
+.idea/
+
+# Coverage
+.coverage
+.coverage.*
+*.cover
+*.py,cover
+*.tox/
+*.nox/
+*.coverage
+nosetests.xml
+coverage.xml
+*.hypothesis/
+
+# PyInstaller
+*.spec
+
+# Flake8
+flake8-report.html
+flake8-report.json
+
+# Pycharm
+.idea/
+
+# Cython Debugging
+cython_debug/
+
+# Local Django settings
+local_settings.py
+
+# FastAPI migration folder
+alembic/
+
+# PostgreSQL and SQLAlchemy
+*.db
+*.sqlite
+
+# dotenv
+.env
+
+# Docker files
+*.log
+docker-compose.override.yml

@@ -4,7 +4,7 @@ A simple user authentication system built with **FastAPI**, featuring:
 
 - JWT-based token auth (`OAuth2PasswordBearer`)
 - Password hashing with **bcrypt**
-- Dummy in-memory user "database"
+- PostgreSQL/SQLModel user database
 - Protected routes
 
 ## 🚀 Getting Started
@@ -21,51 +21,87 @@ A simple user authentication system built with **FastAPI**, featuring:
 
    ```bash
    bash scripts/setup.sh
+   ```
 
 3. **Install Project Dependencies**
    After running the setup script, install the necessary dependencies:
 
    ```bash
    pip-3.11 install -r requirements.txt
+   ```
 
 4. **Start the Production Server**
    Once the build is complete, you can start the production server:
-   
+
    ```bash
-   uvicorn main:app --host 0.0.0.0 --port 8000 --reload 
-
-
+   uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+   ```
 
 Visit: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) to test the API using the Swagger UI.
 
-## 🧪 Example Credentials
-
-Use the following to log in:
-
-- **Username:** `tim`
-- **Password:** `password` (if you hashed it from this plain-text)
-
 ## 📂 Endpoints Overview
 
-| Method | Endpoint          | Description              |
-| ------ | ----------------- | ------------------------ |
-| POST   | `/token`          | Get access token         |
-| GET    | `/users/me/`      | Get current user info    |
-| GET    | `/users/me/items` | Get current user’s items |
+| Method | Endpoint              | Description              |
+| ------ | --------------------- | ------------------------ |
+| POST   | `/api/auth`           | Log in, get JWT token    |
+| POST   | `/api/users`          | Register a new user      |
+| POST   | `/api/logout`         | Log out (stateless)      |
+| GET    | `/api/users/me/`      | Get current user info    |
+| GET    | `/api/users/me/items` | Get current user's items |
 
-> ⚠️ This uses a fake in-memory DB — not production-ready.
+## 📝 Example Requests
+
+### Signup
+
+```bash
+curl -X POST http://localhost:8000/api/users \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","name":"Test User","password":"testpass"}'
+```
+
+### Login
+
+```bash
+curl -X POST http://localhost:8000/api/auth \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","password":"testpass"}'
+```
+
+**Login Response Example:**
+
+```json
+{
+  "ok": true,
+  "message": "Login successful",
+  "payload": {
+    "token": "<JWT>",
+    "user": {
+      "id": 1,
+      "email": "test@example.com",
+      "name": "Test User"
+    }
+  }
+}
+```
+
+### Logout
+
+```bash
+curl -X POST http://localhost:8000/api/logout
+```
 
 ## 🔒 Security Notes
 
 - Passwords are hashed using **bcrypt**
 - JWT tokens use **HS256**
 - Tokens expire after **60 minutes**
+- **Email** is used as the unique user identifier
 
 ## 🧠 TODO
 
-- Replace dummy DB with real database (e.g., PostgreSQL)
-- Add user registration
 - Add refresh token mechanism
+- Add user profile update/delete
+- Add email verification
 
 ---
 

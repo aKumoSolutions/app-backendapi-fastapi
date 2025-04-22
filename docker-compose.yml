@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dfadsfasdf
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+  # backend:
+  #   image: IMAGE_NAME
+  #   command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     - DATABASE_URL=postgresql://postgres:dfadsfasdf@db:5432/postgres
+  #   depends_on:
+  #     - db
